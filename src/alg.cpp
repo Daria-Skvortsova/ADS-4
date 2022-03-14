@@ -11,21 +11,23 @@ int countPairs1(int* arr, int len, int value) {
     return otvet;
 }
 int countPairs2(int* arr, int len, int value) {
-    int left = len;
-    int proverka = 0;
-    while (arr[left] > value) {
-        left--;
+  int left = len;
+  int proverka = 0;
+  while (arr[left-1] > value) {
+    left--;
+  }
+  int otvet = 0;
+  for (int right = 0; right < left-1; right++) {
+    for (int j = right + 1; j < left; j++) {
+      if ((arr[right] + arr[j]) == value) {
+        otvet++;
+      }
     }
-    int otvet = 0;
-    for (int right = 0; right < left; right++) {
-        for (int j = right + 1; j < left; j++) {
-            if ((arr[right] + arr[j]) == value) {
-                otvet++;
-            }
-        }
-        left--;
+    if (arr[right] != arr[right + 1]) {
+      left--;
     }
-    return otvet;
+  }
+  return otvet;
 }
 int cbinsearch(int* arr, int size, int value) {
     int otvet, ceredina;
